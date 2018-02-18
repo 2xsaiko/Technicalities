@@ -125,7 +125,7 @@ public final class ManualAPIImpl implements ManualAPI {
     public void addTab(final TabIconRenderer renderer, @Nullable final String tooltip, final String path) {
         tabs.add(new Tab(renderer, tooltip, path));
         if (tabs.size() > 7) {
-            Technicalities.log.warn("Gosh I'm popular! Too many tabs were added to the in-game manual, so some won't be shown. In case this actually happens, let me know and I'll look into making them scrollable or something...");
+            Technicalities.getLog().warn("Gosh I'm popular! Too many tabs were added to the in-game manual, so some won't be shown. In case this actually happens, let me know and I'll look into making them scrollable or something...");
         }
     }
 
@@ -133,7 +133,7 @@ public final class ManualAPIImpl implements ManualAPI {
     public void addTab(TabProvider tabProvider) {
         tabs.add(tabProvider);
         if (tabs.size() > 7) {
-            Technicalities.log.warn("Gosh I'm popular! Too many tabs were added to the in-game manual, so some won't be shown. In case this actually happens, let me know and I'll look into making them scrollable or something...");
+            Technicalities.getLog().warn("Gosh I'm popular! Too many tabs were added to the in-game manual, so some won't be shown. In case this actually happens, let me know and I'll look into making them scrollable or something...");
         }
     }
 
@@ -195,7 +195,7 @@ public final class ManualAPIImpl implements ManualAPI {
                         return image;
                     }
                 } catch (final Throwable t) {
-                    Technicalities.log.warn(MESSAGE_IMAGE_PROVIDER_EXCEPTION, t);
+                    Technicalities.getLog().warn(MESSAGE_IMAGE_PROVIDER_EXCEPTION, t);
                 }
             }
         }
@@ -206,7 +206,7 @@ public final class ManualAPIImpl implements ManualAPI {
     @Override
     public void openFor(final EntityPlayer player) {
         if (player.getEntityWorld().isRemote) {
-            player.openGui(Technicalities.instance, TKGuiHandler.GuiId.BOOK_MANUAL.ordinal(), player.getEntityWorld(), 0, 0, 0);
+            player.openGui(Technicalities.INSTANCE, TKGuiHandler.GuiId.BOOK_MANUAL.ordinal(), player.getEntityWorld(), 0, 0, 0);
         }
     }
 
@@ -272,7 +272,7 @@ public final class ManualAPIImpl implements ManualAPI {
                     return path;
                 }
             } catch (final Throwable t) {
-                Technicalities.log.warn(warning, t);
+                Technicalities.getLog().warn(warning, t);
             }
         }
         return null;
@@ -315,7 +315,7 @@ public final class ManualAPIImpl implements ManualAPI {
                     return Optional.of(lines);
                 }
             } catch (final Throwable t) {
-                Technicalities.log.warn(MESSAGE_CONTENT_LOOKUP_EXCEPTION, t);
+                Technicalities.getLog().warn(MESSAGE_CONTENT_LOOKUP_EXCEPTION, t);
             }
         }
         return Optional.empty();

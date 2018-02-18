@@ -4,7 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import com.technicalitiesmc.api.heat.IHeatPropertyRegistry;
 import com.technicalitiesmc.api.heat.IThermalMaterial;
-import com.technicalitiesmc.base.Technicalities;
+import com.technicalitiesmc.base.TechnicalitiesKt;
 import com.technicalitiesmc.base.init.TKHeatObjects;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -68,7 +68,7 @@ public enum HeatPropertyRegistry implements IHeatPropertyRegistry {
     }
 
     static {
-        NULL_MAT_NAME = new ResourceLocation(Technicalities.MODID, "nullmaterial");
+        NULL_MAT_NAME = new ResourceLocation(TechnicalitiesKt.MODID, "nullmaterial");
         NULL_MATERIAL = TKHeatObjects.DEFAULT;
     }
 

@@ -10,6 +10,8 @@
 	  "authorList": ["amadornes"],
 	  "logoFile": "",
 	  "screenshots": [],
-	  "dependencies": []
+	  "dependencies": [ "eleccore" ],
+	  "requiredMods": [ "forge", "forgelin", "quacklib", "eleccore" ],
+	  "useDependencyInformation": true
 	}
 ]

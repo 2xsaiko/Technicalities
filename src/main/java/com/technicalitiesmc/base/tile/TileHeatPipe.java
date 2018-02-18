@@ -24,11 +24,11 @@ public class TileHeatPipe extends TileFloatingPipeBase implements IHeatConductor
     @Override
     public boolean testConnectionOnSide(EnumFacing side) {
         boolean autoConnect = super.testConnectionOnSide(side) ||
-            Optional.ofNullable(getWorld().getTileEntity(pos))
-                .filter(it -> it.hasCapability(TechnicalitiesAPI.HEAT_CONDUCTOR_CAP, null))
-                .map(it -> it.getCapability(TechnicalitiesAPI.HEAT_CONDUCTOR_CAP, null))
-                .map(it -> it.touches(side.getOpposite()))
-                .orElse(false);
+                Optional.ofNullable(getWorld().getTileEntity(pos))
+                        .filter(it -> it.hasCapability(TechnicalitiesAPI.getHeatConductorCap(), null))
+                        .map(it -> it.getCapability(TechnicalitiesAPI.getHeatConductorCap(), null))
+                        .map(it -> it.touches(side.getOpposite()))
+                        .orElse(false);
 
         if (overrides.containsKey(side) && overrides.get(side).equals(autoConnect)) {
             overrides.remove(side);
@@ -47,8 +47,8 @@ public class TileHeatPipe extends TileFloatingPipeBase implements IHeatConductor
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
         short amap = (short) (int) Arrays.stream(EnumFacing.VALUES)
-            .map(it -> ((overrides.containsKey(it) ? 1 : 0) | (overrides.getOrDefault(it, false) ? 2 : 0)) << (it.getIndex() * 2))
-            .reduce(0, (acc, it) -> acc | it);
+                .map(it -> ((overrides.containsKey(it) ? 1 : 0) | (overrides.getOrDefault(it, false) ? 2 : 0)) << (it.getIndex() * 2))
+                .reduce(0, (acc, it) -> acc | it);
         compound.setShort("overrides", amap);
         return compound;
     }
@@ -59,10 +59,10 @@ public class TileHeatPipe extends TileFloatingPipeBase implements IHeatConductor
         short amap = compound.getShort("overrides");
         overrides.clear();
         Arrays.stream(EnumFacing.VALUES)
-            .map(it -> Pair.of(it, (amap >> (it.getIndex() * 2)) & 3))
-            .filter(it -> (it.getRight() & 1) != 0)
-            .map(it -> Pair.of(it.getLeft(), (it.getRight() & 2) != 0))
-            .forEach(it -> overrides.put(it.getLeft(), it.getRight()));
+                .map(it -> Pair.of(it, (amap >> (it.getIndex() * 2)) & 3))
+                .filter(it -> (it.getRight() & 1) != 0)
+                .map(it -> Pair.of(it.getLeft(), (it.getRight() & 2) != 0))
+                .forEach(it -> overrides.put(it.getLeft(), it.getRight()));
     }
 
     @SuppressWarnings("ConstantConditions")
@@ -93,7 +93,7 @@ public class TileHeatPipe extends TileFloatingPipeBase implements IHeatConductor
     @Nullable
     @Override
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-        if (capability == TechnicalitiesAPI.HEAT_CONDUCTOR_CAP && facing == null) {
+        if (capability == TechnicalitiesAPI.getHeatConductorCap() && facing == null) {
             return (T) this;
         } else {
             return super.getCapability(capability, facing);

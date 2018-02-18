@@ -1,6 +1,6 @@
 package com.technicalitiesmc.base.inventory;
 
-import com.technicalitiesmc.base.Technicalities;
+import com.technicalitiesmc.base.TechnicalitiesKt;
 import com.technicalitiesmc.base.item.ItemRecipeBook;
 import com.technicalitiesmc.base.tile.TileWorkbench;
 import com.technicalitiesmc.lib.inventory.SimpleItemHandler;
@@ -46,7 +46,7 @@ public class WidgetRecipeBook extends Widget {
         GlStateManager.pushMatrix();
         GlStateManager.translate(guiX, guiY, 0);
         if (!workbench.getInventory().getStackInSlot(slot).isEmpty()) {
-            RenderHelper.bindTexture(new ResourceLocation(Technicalities.MODID, "textures/gui/workbench_book.png"));
+            RenderHelper.bindTexture(new ResourceLocation(TechnicalitiesKt.MODID, "textures/gui/workbench_book.png"));
             GuiDraw.drawTexturedModalRect(-129, 0, 0, 0, 129, window.ySize);
 
             int index = 0;
@@ -76,7 +76,7 @@ public class WidgetRecipeBook extends Widget {
 
             RenderHelper.disableStandardItemLighting();
         }
-        RenderHelper.bindTexture(new ResourceLocation(Technicalities.MODID, "textures/gui/workbench.png"));
+        RenderHelper.bindTexture(new ResourceLocation(TechnicalitiesKt.MODID, "textures/gui/workbench.png"));
 
         // Book icon
         GuiDraw.drawTexturedModalRect(152, 17, window.xSize, 0, 16, 16);
@@ -161,14 +161,14 @@ public class WidgetRecipeBook extends Widget {
                         }
                     }
 
-                    tip.add(TextFormatting.GRAY + I18n.format("gui." + Technicalities.MODID + ".tip.workbench.required") + ":");
+                    tip.add(TextFormatting.GRAY + I18n.format("gui." + TechnicalitiesKt.MODID + ".tip.workbench.required") + ":");
                     stacks.forEachEntry((stack, amt) -> {
                         tip.add(TextFormatting.YELLOW + " " + amt + " " + stack.getDisplayName());
                         return true;
                     });
 
                     if (!pair.getValue().isEmpty()) {
-                        tip.add(TextFormatting.GRAY + I18n.format("gui." + Technicalities.MODID + ".tip.workbench.missing") + ":");
+                        tip.add(TextFormatting.GRAY + I18n.format("gui." + TechnicalitiesKt.MODID + ".tip.workbench.missing") + ":");
                         pair.getValue().forEachEntry((stack, amt) -> {
                             tip.add(TextFormatting.RED + " " + amt + " " + stack.getDisplayName());
                             return true;
@@ -177,7 +177,7 @@ public class WidgetRecipeBook extends Widget {
 
                     if (hasInfo) {
                         tip.add(TextFormatting.DARK_GRAY.toString() + TextFormatting.ITALIC + "<"
-                                + I18n.format("gui." + Technicalities.MODID + ".tip.workbench.info") + ">");
+                                + I18n.format("gui." + TechnicalitiesKt.MODID + ".tip.workbench.info") + ">");
                     }
                 }
 

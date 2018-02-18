@@ -2,7 +2,7 @@ package com.technicalitiesmc.base.init;
 
 import com.technicalitiesmc.api.TechnicalitiesAPI;
 import com.technicalitiesmc.api.heat.IHeatPropertyRegistry;
-import com.technicalitiesmc.base.Technicalities;
+import com.technicalitiesmc.base.TechnicalitiesKt;
 import com.technicalitiesmc.lib.util.DefaultThermalMaterial;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
@@ -15,7 +15,7 @@ public class TKHeatObjects {
     public static final DefaultThermalMaterial IRON, COPPER, GOLD, WATER, AIR, DEFAULT;
 
     public static void init() {
-        IHeatPropertyRegistry registry = TechnicalitiesAPI.heatPropertyRegistry;
+        IHeatPropertyRegistry registry = TechnicalitiesAPI.getHeatPropertyRegistry();
         registry.registerHeatMaterial(Blocks.IRON_BLOCK, IRON);
         registry.registerHeatMaterial(Blocks.GOLD_BLOCK, GOLD);
         registry.registerHeatMaterial(Blocks.WATER, WATER);
@@ -23,7 +23,7 @@ public class TKHeatObjects {
     }
 
     private static DefaultThermalMaterial makeMaterial(String name, double specificHeatCapacity, double thermalConductivity, double density) {
-        return new DefaultThermalMaterial(new ResourceLocation(Technicalities.MODID + "heat", name), specificHeatCapacity * 1000, thermalConductivity, density);
+        return new DefaultThermalMaterial(new ResourceLocation(TechnicalitiesKt.MODID + "heat", name), specificHeatCapacity * 1000, thermalConductivity, density);
     }
 
     static {

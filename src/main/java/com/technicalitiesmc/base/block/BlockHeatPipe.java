@@ -1,9 +1,7 @@
 package com.technicalitiesmc.base.block;
 
 import com.technicalitiesmc.api.heat.IThermalMaterial;
-import com.technicalitiesmc.base.Technicalities;
-import com.technicalitiesmc.base.init.TKBaseItems;
-import com.technicalitiesmc.base.item.ItemWrench;
+import com.technicalitiesmc.base.TechnicalitiesKt;
 import com.technicalitiesmc.base.tile.TileHeatPipe;
 import com.technicalitiesmc.lib.block.BlockFloatingPipeBase;
 import com.technicalitiesmc.lib.block.TileFloatingPipeBase;
@@ -18,6 +16,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import therealfarfetchd.quacklib.common.item.ItemWrench;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -35,7 +34,7 @@ public class BlockHeatPipe extends BlockFloatingPipeBase {
         if (hit == null) return false;
         Item item = player.getHeldItem(hand).item;
 
-        if (item == TKBaseItems.wrench) {
+        if (item == ItemWrench.INSTANCE) {
             EnumFacing side = hit.subHit >= 0 && hit.subHit < 6
                 ? EnumFacing.getFront(hit.subHit)
                 : hit.sideHit;
@@ -49,7 +48,7 @@ public class BlockHeatPipe extends BlockFloatingPipeBase {
                 if (connectionTile instanceof TileHeatPipe && connectionTile.getBlockType() == heatPipe.getBlockType()) {
                     ((TileHeatPipe) connectionTile).toggleSide(side.getOpposite());
                 }
-                ItemWrench.playWrenchSound(world, pos);
+                ItemWrench.INSTANCE.playWrenchSound(world, pos);
                 return true;
             }
         }
@@ -75,7 +74,7 @@ public class BlockHeatPipe extends BlockFloatingPipeBase {
 
         private final float centerVolume;
         private final float sideVolume;
-        private final ResourceLocation resourceLocation = new ResourceLocation(Technicalities.MODID, "heat_pipe_" + name().toLowerCase());
+        private final ResourceLocation resourceLocation = new ResourceLocation(TechnicalitiesKt.MODID, "heat_pipe_" + name().toLowerCase());
 
         @Override
         public double getSpecificHeatCapacity() {

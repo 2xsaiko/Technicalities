@@ -15,7 +15,7 @@ import java.util.function.BiPredicate;
 public interface IKineticNode extends INBTSerializable<NBTTagCompound> {
 
     static IKineticNode create(IKineticNode.Host host) {
-        return TechnicalitiesAPI.kineticNodeProvider.apply(host);
+        return TechnicalitiesAPI.getKineticNodeProvider().invoke(host);
     }
 
     void validate(boolean isRemote);

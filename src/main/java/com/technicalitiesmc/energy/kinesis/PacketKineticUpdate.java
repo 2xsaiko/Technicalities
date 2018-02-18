@@ -4,6 +4,7 @@ import com.technicalitiesmc.base.Technicalities;
 import com.technicalitiesmc.lib.network.Packet;
 import it.unimi.dsi.fastutil.objects.Object2FloatMap;
 import it.unimi.dsi.fastutil.objects.Object2FloatOpenHashMap;
+import kotlin.Unit;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.relauncher.Side;
@@ -25,7 +26,10 @@ public class PacketKineticUpdate extends Packet<PacketKineticUpdate> {
 
     @Override
     public void handleClientSide(EntityPlayer player) {
-        Technicalities.proxy.schedule(Side.CLIENT, () -> ClientKineticManager.INSTANCE.clientUpdates.putAll(updates));
+        Technicalities.proxy.schedule(Side.CLIENT, () -> {
+            ClientKineticManager.INSTANCE.clientUpdates.putAll(updates);
+            return Unit.INSTANCE;
+        });
     }
 
     @Override

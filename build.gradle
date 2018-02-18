@@ -11,11 +11,14 @@ buildscript {
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+        // noinspection DifferentKotlinGradleVersion
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:+"
     }
 }
 
 // Load ForgeGradle
 apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'kotlin'
 
 // Set mod version
 version = mod_version
@@ -75,6 +78,12 @@ repositories {
 		//MCMP
 		url "http://maven.amadornes.com"
 	}
+    maven {
+        url "http://maven.shadowfacts.net/"
+    }
+    maven {
+        url "https://farfetchd.duckdns.org/maven"
+    }
 }
 
 // Add compiletime and runtime dependencies
@@ -82,6 +91,9 @@ dependencies {
 	runtimeOnly "mezz.jei:jei_${mc_version}:${jei_version}"
 	runtimeOnly "mcp.mobius.waila:Hwyla:${waila_version}"
 	//deobfCompile "MCMultiPart2:MCMultiPart:${mcmp_version}"
+
+    deobfCompile "quacklib:quacklib:2.0.0_5"
+    compile 'net.shadowfacts:Forgelin:+'
 }
 
 // Set a classifier for the main jar file
@@ -144,4 +156,12 @@ allprojects {
 			testOutputDir = file("$rootDir/out/${project.name}/test")
 		}
 	}
+}
+
+sourceCompatibility = targetCompatibility = "1.8"
+compileJava {
+    sourceCompatibility = targetCompatibility = "1.8"
+}
+compileKotlin {
+    sourceCompatibility = targetCompatibility = "1.8"
 }

@@ -59,8 +59,8 @@ public final class WorldHeatHandler implements IWorldHeatHandler, INBTSerializab
         WrappedHeatConductor bla = null;
         if (state.getBlock().hasTileEntity(state)){
             TileEntity tile = WorldHelper.getTileAt(world, pos);
-            if (tile != null && tile.hasCapability(TechnicalitiesAPI.HEAT_CONDUCTOR_CAP, null)) {
-                bla = new WrappedHeatConductor(state, Preconditions.checkNotNull(tile.getCapability(TechnicalitiesAPI.HEAT_CONDUCTOR_CAP, null)));
+            if (tile != null && tile.hasCapability(TechnicalitiesAPI.getHeatConductorCap(), null)) {
+                bla = new WrappedHeatConductor(state, Preconditions.checkNotNull(tile.getCapability(TechnicalitiesAPI.getHeatConductorCap(), null)));
             }
         }
         if (bla == null){

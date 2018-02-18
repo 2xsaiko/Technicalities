@@ -2,7 +2,7 @@ package com.technicalitiesmc.pneumatics;
 
 import com.google.common.base.Throwables;
 import com.technicalitiesmc.api.pneumatics.TubeModule;
-import com.technicalitiesmc.base.Technicalities;
+import com.technicalitiesmc.base.TechnicalitiesKt;
 import com.technicalitiesmc.pneumatics.network.*;
 import com.technicalitiesmc.pneumatics.tube.IWindowModule;
 import com.technicalitiesmc.pneumatics.tube.TubeTicker;
@@ -28,7 +28,7 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 @Mod(modid = TKPneumatics.MODID, name = TKPneumatics.NAME, version = TKPneumatics.VERSION,
-        dependencies = "required-after:" + Technicalities.MODID)
+        dependencies = "required-after:" + TechnicalitiesKt.MODID)
 public class TKPneumatics {
 
     public static final String MODID = "tkpneumatics", NAME = "Technicalities Pneumatics", VERSION = "%VERSION%";

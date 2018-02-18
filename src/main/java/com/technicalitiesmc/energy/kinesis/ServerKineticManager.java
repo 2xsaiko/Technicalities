@@ -20,11 +20,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
 
-import java.util.ArrayDeque;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Queue;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiPredicate;
 
@@ -116,7 +112,7 @@ public enum ServerKineticManager implements KineticManager {
                     updates.add(node);
                 }
             }
-            Technicalities.networkHandler.sendTo(new PacketKineticUpdate(updates), (EntityPlayerMP) player);
+            Technicalities.getNetworkHandler().sendTo(new PacketKineticUpdate(updates), (EntityPlayerMP) player);
         }
     }
 

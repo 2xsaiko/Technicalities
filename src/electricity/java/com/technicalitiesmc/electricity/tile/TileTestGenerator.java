@@ -180,13 +180,13 @@ public class TileTestGenerator extends TileBase implements IEnergySource, ISimpl
 	@Override
 	@SuppressWarnings("all")
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
-		return capability == TechnicalitiesAPI.ELECTRICITY_CAP || super.hasCapability(capability, facing);
+		return capability == TechnicalitiesAPI.getElectricityCap() || super.hasCapability(capability, facing);
 	}
 
 	@Override
 	@SuppressWarnings("all")
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
-		return capability == TechnicalitiesAPI.ELECTRICITY_CAP ? (T) this : super.getCapability(capability, facing);
+		return capability == TechnicalitiesAPI.getElectricityCap() ? (T) this : super.getCapability(capability, facing);
 	}
 
 	@Override

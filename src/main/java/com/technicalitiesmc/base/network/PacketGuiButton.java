@@ -39,7 +39,7 @@ public class PacketGuiButton extends LocatedPacket<PacketGuiButton> {
     }
 
     public static void send(BlockPos pos, int button) {
-        Technicalities.networkHandler.sendToServer(new PacketGuiButton(pos, button));
+        Technicalities.getNetworkHandler().sendToServer(new PacketGuiButton(pos, button));
     }
 
 }

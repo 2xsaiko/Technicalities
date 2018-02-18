@@ -2,12 +2,9 @@ package com.technicalitiesmc.energy.heat;
 
 import com.google.common.base.Preconditions;
 import com.technicalitiesmc.api.TechnicalitiesAPI;
-import com.technicalitiesmc.base.Technicalities;
-import com.technicalitiesmc.lib.util.DefaultCapabilityProvider;
 import elec332.core.main.APIHandler;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.gen.ChunkProviderServer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.Capability;
@@ -36,7 +33,7 @@ public enum GlobalHeatHandler {
         if (event.side == Side.CLIENT || event.phase == TickEvent.Phase.END){
             return;
         }
-        WorldHeatHandler h = (WorldHeatHandler) event.world.getCapability(TechnicalitiesAPI.WORLD_HEAT_CAP, null);
+        WorldHeatHandler h = (WorldHeatHandler) event.world.getCapability(TechnicalitiesAPI.getWorldHeatCap(), null);
         Preconditions.checkNotNull(h); //You never know...
         h.update(event.world, ((ChunkProviderServer) event.world.getChunkProvider()).id2ChunkMap.values());
     }
@@ -66,13 +63,13 @@ public enum GlobalHeatHandler {
 
         @Override
         public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
-            return capability == TechnicalitiesAPI.WORLD_HEAT_CAP;
+            return capability == TechnicalitiesAPI.getWorldHeatCap();
         }
 
         @Nullable
         @Override
         public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
-            return capability == TechnicalitiesAPI.WORLD_HEAT_CAP ? (T) handler : null;
+            return capability == TechnicalitiesAPI.getWorldHeatCap() ? (T) handler : null;
         }
 
         @Override

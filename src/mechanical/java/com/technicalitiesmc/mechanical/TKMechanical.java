@@ -1,6 +1,6 @@
 package com.technicalitiesmc.mechanical;
 
-import com.technicalitiesmc.base.Technicalities;
+import com.technicalitiesmc.base.TechnicalitiesKt;
 import com.technicalitiesmc.mechanical.proxy.TKMCommonProxy;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 @Mod(modid = TKMechanical.MODID, name = TKMechanical.NAME, version = TKMechanical.VERSION,
-    dependencies = "required-after:" + Technicalities.MODID)
+        dependencies = "required-after:" + TechnicalitiesKt.MODID)
 public class TKMechanical {
     public static final String MODID = "tkmechanical", NAME = "Technicalities Mechanical", VERSION = "%VERSION%";
 

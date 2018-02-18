@@ -2,6 +2,7 @@ package com.technicalitiesmc.base.init;
 
 import com.technicalitiesmc.api.TechnicalitiesAPI;
 import com.technicalitiesmc.base.Technicalities;
+import com.technicalitiesmc.base.TechnicalitiesKt;
 import com.technicalitiesmc.base.block.*;
 import com.technicalitiesmc.base.tile.*;
 import com.technicalitiesmc.lib.item.ItemBlockBase;
@@ -17,7 +18,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
-@Mod.EventBusSubscriber(modid = Technicalities.MODID)
+@Mod.EventBusSubscriber(modid = TechnicalitiesKt.MODID)
 public class TKBaseBlocks {
     public static Block crate = new BlockCrate();
     public static Block barrel = new BlockBarrel();
@@ -50,9 +51,9 @@ public class TKBaseBlocks {
         registerTileEntity(TileHeatPipe.class, "heat_pipe");
         register(registry, heatTest, "heatTest");
 
-        TechnicalitiesAPI.heatPropertyRegistry.registerHeatMaterial(heat_pipe_small, BlockHeatPipe.ThermalMaterial.SMALL);
-        TechnicalitiesAPI.heatPropertyRegistry.registerHeatMaterial(heat_pipe_medium, BlockHeatPipe.ThermalMaterial.MEDIUM);
-        TechnicalitiesAPI.heatPropertyRegistry.registerHeatMaterial(heat_pipe_large, BlockHeatPipe.ThermalMaterial.LARGE);
+        TechnicalitiesAPI.getHeatPropertyRegistry().registerHeatMaterial(heat_pipe_small, BlockHeatPipe.ThermalMaterial.SMALL);
+        TechnicalitiesAPI.getHeatPropertyRegistry().registerHeatMaterial(heat_pipe_medium, BlockHeatPipe.ThermalMaterial.MEDIUM);
+        TechnicalitiesAPI.getHeatPropertyRegistry().registerHeatMaterial(heat_pipe_large, BlockHeatPipe.ThermalMaterial.LARGE);
     }
 
     @SubscribeEvent
@@ -76,7 +77,7 @@ public class TKBaseBlocks {
     }
 
     private static void register(IForgeRegistry<Block> registry, Block block, String name, Class<? extends TileEntity> tile) {
-        ResourceLocation resLoc = new ResourceLocation(Technicalities.MODID, name);
+        ResourceLocation resLoc = new ResourceLocation(TechnicalitiesKt.MODID, name);
         registry.register(block.setRegistryName(resLoc));
         if (tile != null) {
             registerTileEntity(tile, name);
@@ -88,13 +89,13 @@ public class TKBaseBlocks {
     }
 
     private static void registerItem(IForgeRegistry<Item> registry, Item item, String name) {
-        ResourceLocation resLoc = new ResourceLocation(Technicalities.MODID, name);
+        ResourceLocation resLoc = new ResourceLocation(TechnicalitiesKt.MODID, name);
         registry.register(item.setRegistryName(resLoc));
         Technicalities.proxy.registerItemModel(item, 0, new ModelResourceLocation(resLoc, "inventory"));
     }
 
     private static void registerTileEntity(Class<? extends TileEntity> tile, String name) {
-        ResourceLocation resLoc = new ResourceLocation(Technicalities.MODID, name);
+        ResourceLocation resLoc = new ResourceLocation(TechnicalitiesKt.MODID, name);
         if (tile != null) {
             GameRegistry.registerTileEntity(tile, resLoc.toString());
         }

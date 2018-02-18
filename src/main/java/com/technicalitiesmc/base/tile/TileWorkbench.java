@@ -1,6 +1,6 @@
 package com.technicalitiesmc.base.tile;
 
-import com.technicalitiesmc.base.Technicalities;
+import com.technicalitiesmc.base.TechnicalitiesKt;
 import com.technicalitiesmc.base.init.TKBaseBlocks;
 import com.technicalitiesmc.base.init.TKBaseItems;
 import com.technicalitiesmc.base.inventory.WidgetRecipeBook;
@@ -259,7 +259,7 @@ public class TileWorkbench extends TileBase implements ISimpleWindowFactory {
         window.addWidget(new WidgetInsertingSlot(inventory, TileWorkbench.BOOK_START, 8, 36));
         window.addWidget(new WidgetInsertingSlot(inventory, TileWorkbench.BOOK_START + 1, 152, 54));
 
-        window.addWidget(new Widget(150, 35, 150, 35, 20, 50).setBackground(new ResourceLocation(Technicalities.MODID, "textures/gui/workbench.png")));
+        window.addWidget(new Widget(150, 35, 150, 35, 20, 50).setBackground(new ResourceLocation(TechnicalitiesKt.MODID, "textures/gui/workbench.png")));
 
         window.addWidget(new WidgetProgressArrow(90, 35, new IHasProgressBar() {
             @Override

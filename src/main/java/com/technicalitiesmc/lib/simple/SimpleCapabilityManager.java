@@ -21,22 +21,22 @@ public enum SimpleCapabilityManager {
      * implementation nor storage solution.
      */
     @SuppressWarnings("unchecked")
-    public <T> void init(ASMDataTable dataTable) {
+    public void init(ASMDataTable dataTable) {
         dataTable.getAll(SimpleCapability.class.getName()).forEach(data -> {
             try {
                 Class<?> owner = Class.forName(data.getClassName()), clazz = owner;
                 if (!data.getObjectName().equals(data.getClassName())) {
                     clazz = owner.getDeclaredField(data.getObjectName()).getAnnotation(CapabilityInject.class).value();
                 }
-                CapabilityManager.INSTANCE.register((Class<T>) clazz, new Capability.IStorage<T>() {
+                CapabilityManager.INSTANCE.register(clazz, new Capability.IStorage() {
 
                     @Override
-                    public NBTBase writeNBT(Capability<T> capability, T instance, EnumFacing side) {
+                    public NBTBase writeNBT(Capability capability, Object instance, EnumFacing side) {
                         return null;
                     }
 
                     @Override
-                    public void readNBT(Capability<T> capability, T instance, EnumFacing side, NBTBase nbt) {
+                    public void readNBT(Capability capability, Object instance, EnumFacing side, NBTBase nbt) {
                     }
 
                 }, () -> null);

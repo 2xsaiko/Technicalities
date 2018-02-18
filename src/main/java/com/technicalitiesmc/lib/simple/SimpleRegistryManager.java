@@ -22,7 +22,7 @@ public enum SimpleRegistryManager {
      * Creates a registry for all the classes marked with {@link SimpleRegistry @SimpleRegistry}.
      */
     @SuppressWarnings("unchecked")
-    public <T extends IForgeRegistryEntry<T>> void init(ASMDataTable dataTable) {
+    public void init(ASMDataTable dataTable) {
         dataTable.getAll(SimpleRegistry.class.getName()).forEach(data -> {
             try {
                 Class<?> clazz = Class.forName(data.getClassName());
@@ -39,10 +39,10 @@ public enum SimpleRegistryManager {
                         clazz = Class.forName(field.getGenericType().getTypeName().split("<")[1].split(">")[0]);
                     }
                 }
-                IForgeRegistry<T> registry = new RegistryBuilder<T>()//
-                        .setName(new ResourceLocation((String) data.getAnnotationInfo().get("value")))//
-                        .setType((Class<T>) clazz)//
-                        .setIDRange(0, Short.MAX_VALUE)//
+                IForgeRegistry registry = new RegistryBuilder()
+                        .setName(new ResourceLocation((String) data.getAnnotationInfo().get("value")))
+                        .setType(clazz)
+                        .setIDRange(0, Short.MAX_VALUE)
                         .create();
 
                 if (field != null) {

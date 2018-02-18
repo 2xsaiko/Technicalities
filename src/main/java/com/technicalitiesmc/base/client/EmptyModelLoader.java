@@ -1,6 +1,6 @@
 package com.technicalitiesmc.base.client;
 
-import com.technicalitiesmc.base.Technicalities;
+import com.technicalitiesmc.base.TechnicalitiesKt;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.IBakedModel;
@@ -28,7 +28,7 @@ public enum EmptyModelLoader implements ICustomModelLoader {
 
     INSTANCE;
 
-    private final ResourceLocation location = new ResourceLocation(Technicalities.MODID, "block/empty");
+    private final ResourceLocation location = new ResourceLocation(TechnicalitiesKt.MODID, "block/empty");
 
     @Override
     public void onResourceManagerReload(IResourceManager resourceManager) {
@@ -36,7 +36,7 @@ public enum EmptyModelLoader implements ICustomModelLoader {
 
     @Override
     public boolean accepts(ResourceLocation modelLocation) {
-        return modelLocation.getResourceDomain().equals(Technicalities.MODID) && modelLocation.getResourcePath().contains("empty");
+        return modelLocation.getResourceDomain().equals(TechnicalitiesKt.MODID) && modelLocation.getResourcePath().contains("empty");
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.technicalitiesmc.base.manual.client.manual.provider;
 
 import com.technicalitiesmc.base.Technicalities;
+import com.technicalitiesmc.base.TechnicalitiesKt;
 import com.technicalitiesmc.base.manual.api.manual.ImageProvider;
 import com.technicalitiesmc.base.manual.api.manual.ImageRenderer;
 import com.technicalitiesmc.base.manual.client.manual.segment.render.ItemStackImageRenderer;
@@ -17,7 +18,7 @@ import java.util.Collections;
 import java.util.List;
 
 public final class OreDictImageProvider implements ImageProvider {
-    private static final String WARNING_ORE_DICT_MISSING = Technicalities.MODID + ".manual.warning.missing.oreDict";
+    private static final String WARNING_ORE_DICT_MISSING = TechnicalitiesKt.MODID + ".manual.warning.missing.oreDict";
 
     @Override
     public ImageRenderer getImage(final String data) {
@@ -65,14 +66,14 @@ public final class OreDictImageProvider implements ImageProvider {
             try {
                 item.getSubItems(itemTab, subItems);
             } catch (RuntimeException | LinkageError e) {
-                Technicalities.log.warn("Caught a crash while getting sub-items of {}", item, e);
+                Technicalities.getLog().warn("Caught a crash while getting sub-items of {}", item, e);
             }
 
             for (ItemStack subItem : subItems) {
                 if (subItem == null) {
-                    Technicalities.log.warn("Found a null subItem of {}", item);
+                    Technicalities.getLog().warn("Found a null subItem of {}", item);
                 } else if (subItem.isEmpty()) {
-                    Technicalities.log.warn("Found an empty subItem of {}", item);
+                    Technicalities.getLog().warn("Found an empty subItem of {}", item);
                 } else {
                     if (subItem.getCount() != stackSize) {
                         ItemStack subItemCopy = subItem.copy();
