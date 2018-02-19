@@ -2,7 +2,6 @@ package com.technicalitiesmc.base.tile;
 
 import com.technicalitiesmc.base.TechnicalitiesKt;
 import com.technicalitiesmc.base.init.TKBaseBlocks;
-import com.technicalitiesmc.base.init.TKBaseItems;
 import com.technicalitiesmc.base.inventory.WidgetRecipeBook;
 import com.technicalitiesmc.base.item.ItemRecipeBook;
 import com.technicalitiesmc.base.item.ItemRecipeBook.Recipe;
@@ -59,7 +58,7 @@ public class TileWorkbench extends TileBase implements ISimpleWindowFactory {
     private int ink = 0;
 
     public TileWorkbench() {
-        inventory.withFilter(TKBaseItems.recipe_book, BOOK_START);
+        inventory.withFilter(ItemRecipeBook.INSTANCE, BOOK_START);
         inventory.withFilter(new ItemStack(Items.DYE, 1, 0), BOOK_START + 1);
     }
 
@@ -128,7 +127,7 @@ public class TileWorkbench extends TileBase implements ISimpleWindowFactory {
 
     private void updateRecipeBook() {
         recipes.clear();
-        for (Recipe recipe : ItemRecipeBook.getRecipes(inventory.getStackInSlot(BOOK_START))) {
+        for (Recipe recipe : ItemRecipeBook.INSTANCE.getRecipes(inventory.getStackInSlot(BOOK_START))) {
             recipes.add(Pair.of(recipe, computeRequirements(recipe)));
         }
     }
@@ -220,7 +219,7 @@ public class TileWorkbench extends TileBase implements ISimpleWindowFactory {
 
     @Override
     public void onDataPacket(int id, NBTTagCompound tag) {
-        if (id == 4){
+        if (id == 4) {
             ink = tag.getInteger("ink");
         } else {
             super.onDataPacket(id, tag);
@@ -283,7 +282,8 @@ public class TileWorkbench extends TileBase implements ISimpleWindowFactory {
         window.addWidget(new WidgetButton(152, 17, 16, 16).addButtonEvent(widgetButton -> {
             SimpleItemHandler inv = getInventory();
             ItemStack book = inv.getStackInSlot(TileWorkbench.BOOK_START).copy();
-            if (!book.isEmpty() && consumeInk(true) && ItemRecipeBook.addRecipe(book, Recipe.fromGrid(getGrid(), world))) {
+            Recipe recipe = Recipe.Companion.fromGrid(getGrid(), world);
+            if (recipe != null && !book.isEmpty() && consumeInk(true) && ItemRecipeBook.INSTANCE.addRecipe(book, recipe)) {
                 inv.setStackInSlot(TileWorkbench.BOOK_START, book);
                 consumeInk(false);
             }

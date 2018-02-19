@@ -4,11 +4,9 @@ import com.technicalitiesmc.api.pneumatics.TubeModule;
 import com.technicalitiesmc.lib.item.ItemBase;
 import com.technicalitiesmc.pneumatics.tube.module.ModuleManager;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 
-import javax.annotation.Nonnull;
-import java.util.List;
 import java.util.Set;
 
 public class ItemTubeModule extends ItemBase {
@@ -24,7 +22,7 @@ public class ItemTubeModule extends ItemBase {
     }
 
     @Override
-    public void getSubItemsC(@Nonnull Item item, List<ItemStack> items, CreativeTabs tab) {
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
         if (!isInCreativeTab(tab)) {
             return;
         }
@@ -37,5 +35,4 @@ public class ItemTubeModule extends ItemBase {
             i++;
         }
     }
-
 }

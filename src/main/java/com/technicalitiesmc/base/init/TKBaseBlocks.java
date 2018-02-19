@@ -7,7 +7,6 @@ import com.technicalitiesmc.base.block.*;
 import com.technicalitiesmc.base.tile.*;
 import com.technicalitiesmc.lib.item.ItemBlockBase;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
@@ -25,15 +24,14 @@ public class TKBaseBlocks {
     public static Block crafting_slab = new BlockCraftingSlab();
     public static Block workbench = new BlockWorkbench();
 
-    public static Block funnel = new BlockFunnel();
+    @Deprecated
+    public static Block funnel = BlockFunnel.INSTANCE;
 
     public static Block channel = new BlockChannel();
 
     public static Block heat_pipe_small = new BlockHeatPipe(4 / 16f);
     public static Block heat_pipe_medium = new BlockHeatPipe(6 / 16f);
     public static Block heat_pipe_large = new BlockHeatPipe(8 / 16f);
-
-    private static Block heatTest = new BlockHeatTest(Material.CAKE);
 
     @SubscribeEvent
     public static void onBlockRegistration(RegistryEvent.Register<Block> event) {
@@ -43,13 +41,11 @@ public class TKBaseBlocks {
         register(registry, barrel, "barrel", TileBarrel.class);
         register(registry, crafting_slab, "crafting_slab", TileCraftingSlab.class);
         register(registry, workbench, "workbench", TileWorkbench.class);
-        register(registry, funnel, "funnel");
         register(registry, channel, "channel", TileChannel.class);
         register(registry, heat_pipe_small, "heat_pipe_small");
         register(registry, heat_pipe_medium, "heat_pipe_medium");
         register(registry, heat_pipe_large, "heat_pipe_large");
         registerTileEntity(TileHeatPipe.class, "heat_pipe");
-        register(registry, heatTest, "heatTest");
 
         TechnicalitiesAPI.getHeatPropertyRegistry().registerHeatMaterial(heat_pipe_small, BlockHeatPipe.ThermalMaterial.SMALL);
         TechnicalitiesAPI.getHeatPropertyRegistry().registerHeatMaterial(heat_pipe_medium, BlockHeatPipe.ThermalMaterial.MEDIUM);
@@ -64,12 +60,10 @@ public class TKBaseBlocks {
         registerItem(registry, barrel);
         registerItem(registry, crafting_slab);
         registerItem(registry, workbench);
-        registerItem(registry, funnel);
         registerItem(registry, channel);
         registerItem(registry, heat_pipe_small);
         registerItem(registry, heat_pipe_medium);
         registerItem(registry, heat_pipe_large);
-        registerItem(registry, heatTest);
     }
 
     private static void register(IForgeRegistry<Block> registry, Block block, String name) {

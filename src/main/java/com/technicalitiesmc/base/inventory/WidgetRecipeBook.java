@@ -116,7 +116,7 @@ public class WidgetRecipeBook extends Widget {
         if (param >= 100) {
             SimpleItemHandler inv = workbench.getInventory();
             ItemStack book = inv.getStackInSlot(TileWorkbench.BOOK_START).copy();
-            ItemRecipeBook.removeRecipe(book, param - 100);
+            ItemRecipeBook.INSTANCE.removeRecipe(book, param - 100);
             inv.setStackInSlot(TileWorkbench.BOOK_START, book);
         } else if (param >= 0 && param < 32) {
             boolean pulledAll = true;
@@ -131,10 +131,10 @@ public class WidgetRecipeBook extends Widget {
 
             if (pulledAll) {
                 ItemRecipeBook.Recipe recipe = workbench.getRecipes().get(param).getKey();
-                ItemStack[] grid = recipe.getGrid();
+                List<ItemStack> grid = recipe.getGrid();
                 for (int i = 0; i < 9; i++) {
-                    workbench.pullStack(grid[i]);
-                    workbench.getCraftingGrid().setStackInSlot(i, grid[i].copy());
+                    workbench.pullStack(grid.get(i));
+                    workbench.getCraftingGrid().setStackInSlot(i, grid.get(i).copy());
                 }
             }
         }

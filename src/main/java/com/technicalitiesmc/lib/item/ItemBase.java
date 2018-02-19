@@ -1,9 +1,9 @@
 package com.technicalitiesmc.lib.item;
 
-import elec332.core.item.AbstractItem;
 import elec332.core.world.WorldHelper;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.MinecraftForge;
@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import javax.annotation.Nonnull;
 
-public class ItemBase extends AbstractItem implements ICanBreakOverride {
+public class ItemBase extends Item implements ICanBreakOverride {
 
     public ItemBase() {
         setCreativeTab(CreativeTabs.MISC);
@@ -20,14 +20,14 @@ public class ItemBase extends AbstractItem implements ICanBreakOverride {
 
     private String unlName;
 
-    protected String createUnlocalizedName(){
+    protected String createUnlocalizedName() {
         return "item." + getRegistryName().toString().replace(":", ".").toLowerCase();
     }
 
     @Nonnull
     @Override
     public String getUnlocalizedName() {
-        if (this.unlName == null){
+        if (this.unlName == null) {
             unlName = createUnlocalizedName();
         }
         return unlName;

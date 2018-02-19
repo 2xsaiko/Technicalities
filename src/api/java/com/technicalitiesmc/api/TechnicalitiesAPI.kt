@@ -37,13 +37,21 @@ object TechnicalitiesAPI {
         @JvmStatic @CapabilityInject(IWeatherSimulator::class) set
 
     @JvmStatic
+    @Deprecated("Compatibility only", ReplaceWith("getHeatHandler()", "com.technicalitiesmc.api.getHeatHandler"))
     fun World.getHeatHandler(): IWorldHeatHandler =
             getCapability(worldHeatCap, null)!!
 
     @JvmStatic
+    @Deprecated("Compatibility only", ReplaceWith("getWeatherSimulator()", "com.technicalitiesmc.api.getWeatherSimulator"))
     fun World.getWeatherSimulator(): IWeatherSimulator =
             getCapability(worldWeatherCap, null)!!
 }
+
+fun World.getHeatHandler(): IWorldHeatHandler =
+        getCapability(TechnicalitiesAPI.worldHeatCap, null)!!
+
+fun World.getWeatherSimulator(): IWeatherSimulator =
+        getCapability(TechnicalitiesAPI.worldWeatherCap, null)!!
 
 fun <T : Any> singleAssign() = object : ReadWriteProperty<Any?, T> {
     lateinit var t: T
